@@ -6,8 +6,8 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 
 # --- Configuration ---
-# Replace 'YOUR_TELEGRAM_API_TOKEN' with your actual bot token from BotFather
-TELEGRAM_BOT_TOKEN = 'YOUR_TELEGRAM_API_TOKEN'
+# Your Telegram Bot API Token is now included.
+TELEGRAM_BOT_TOKEN = '7787901518:AAGv5HIlJluo9RP3ku1isPX9Y9OqGkXHSYo'
 
 # Enable logging to see errors and bot activity in the console
 logging.basicConfig(
@@ -39,13 +39,13 @@ def get_youtube_video_id(url: str) -> str | None:
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """
     Handler for the /start command.
-    Sends a welcome message to the user.
+    Sends a welcome message to the user in English.
     """
     user = update.effective_user
     welcome_message = (
-        f"خوش آمدید, {user.first_name}!\n\n"
-        "میں ایک یوٹیوب تھمب نیل ڈاؤنلوڈر بوٹ ہوں۔\n\n"
-        "مجھے کسی بھی یوٹیوب ویڈیو کا لنک بھیجیں اور میں آپ کو اس کا تھمب نیل بھیج دوں گا۔"
+        f"Welcome, {user.first_name}!\n\n"
+        "I am a YouTube Thumbnail Downloader Bot.\n\n"
+        "Send me any YouTube video link, and I will fetch its thumbnail for you."
     )
     await update.message.reply_text(welcome_message)
 
@@ -73,14 +73,14 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         # Send the thumbnail image directly from the URL
         await update.message.reply_photo(
             photo=thumbnail_url,
-            caption="یہ رہا آپ کا تھمب نیل! ✨"
+            caption="Here is your thumbnail! ✨"
         )
     else:
         # If no valid YouTube link is found
         logger.warning(f"Invalid link or text received: {message_text}")
         await update.message.reply_text(
-            "معذرت، یہ ایک درست یوٹیوب لنک نہیں ہے۔\n\n"
-            "براہ کرم ایک صحیح یوٹیوب ویڈیو کا لنک بھیجیں۔ مثال کے طور پر:\n"
+            "Sorry, this does not seem to be a valid YouTube link.\n\n"
+            "Please send a correct YouTube video link. For example:\n"
             "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
         )
 
